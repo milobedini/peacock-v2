@@ -3,8 +3,12 @@ import { GoogleLogin } from '@react-oauth/google'
 import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
+import jwtDecode from 'jwt-decode'
+import client from '../client'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex justify-start items-center flex-col h-screen">
       <div className="relative w-full h-full">
@@ -24,7 +28,31 @@ const Login = () => {
           <div className="shadow-2xl">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
-                console.log(credentialResponse)
+                // console.log(credentialResponse)
+                const user = jwtDecode(credentialResponse.credential)
+                console.log(user.name)
+                const name = user.given_name
+                const email = user.email
+                const imageUrl = user.picture
+                localStorage.setItem(
+                  'userId',
+                  JSON.stringify(credentialResponse?.clientId)
+                )
+                localStorage.setItem('name', JSON.stringify(name))
+                localStorage.setItem('email', JSON.stringify(email))
+                localStorage.setItem('imageUrl', JSON.stringify(imageUrl))
+
+                const doc = {
+                  //   _id: credentialResponse.clientId,
+                  _id: '1',
+                  _type: 'user',
+                  userName: name,
+                  image: imageUrl,
+                }
+
+                client.createIfNotExists(doc).then(() => {
+                  navigate('/', { replace: true })
+                })
               }}
               onError={() => {
                 console.log('Login failed')
