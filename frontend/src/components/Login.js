@@ -43,8 +43,7 @@ const Login = () => {
                 localStorage.setItem('imageUrl', JSON.stringify(imageUrl))
 
                 const doc = {
-                  //   _id: credentialResponse.clientId,
-                  _id: '1',
+                  _id: credentialResponse.clientId,
                   _type: 'user',
                   userName: name,
                   image: imageUrl,
