@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
 import jwtDecode from 'jwt-decode'
-import client from '../client'
+import { client } from '../client'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -28,9 +28,7 @@ const Login = () => {
           <div className="shadow-2xl">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
-                // console.log(credentialResponse)
                 const user = jwtDecode(credentialResponse.credential)
-                console.log(user.name)
                 const name = user.given_name
                 const email = user.email
                 const imageUrl = user.picture
