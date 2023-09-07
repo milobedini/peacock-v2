@@ -21,3 +21,60 @@ export async function getUser() {
   const users = await client.fetch(`*[_type == "user" && _id == ${userId}]`)
   return users
 }
+
+export async function searchQuery(searchTerm) {
+  const query = `*[_type == 'pin' && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
+  image {
+    asset -> {
+      url
+    }
+  },
+  _id,
+  destination,
+  postedBy -> {
+    _id,
+    userName,
+    image
+  },
+  save[] {
+    _key,
+    postedBy -> {
+      _id,
+      userName,
+      image
+    },
+  },
+}`
+
+  const results = await client.fetch(query)
+
+  return results
+}
+
+export async function getFeed() {
+  const query = `*[_type == 'pin'] | order(_createAt desc) {
+  image {
+  asset -> {
+      url
+    }
+  },
+  _id,
+  destination,
+  postedBy -> {
+    _id,
+    userName,
+    image
+  },
+  save[] {
+    _key,
+    postedBy -> {
+      _id,
+      userName,
+      image
+    },
+  },
+  }`
+  const results = await client.fetch(query)
+
+  return results
+}
