@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
+import { fetchUser } from './utils/fetchUser'
 
 export const client = createClient({
   projectId: process.env.REACT_APP_SANITY_PROJECT_ID,
@@ -13,12 +14,14 @@ const builder = imageUrlBuilder(client)
 
 export const urlFor = (source) => builder.image(source)
 
-const userId = localStorage.getItem('userId')
+const userDetails = fetchUser()
 
 // API REQUESTS
 
 export async function getUser() {
-  const users = await client.fetch(`*[_type == "user" && _id == ${userId}]`)
+  const users = await client.fetch(
+    `*[_type == "user" && _id == '${userDetails.id}']`
+  )
   return users
 }
 

@@ -32,13 +32,10 @@ const Login = () => {
                 const name = user.given_name
                 const email = user.email
                 const imageUrl = user.picture
-                localStorage.setItem(
-                  'userId',
-                  JSON.stringify(credentialResponse?.clientId)
-                )
-                localStorage.setItem('name', JSON.stringify(name))
-                localStorage.setItem('email', JSON.stringify(email))
-                localStorage.setItem('imageUrl', JSON.stringify(imageUrl))
+                localStorage.setItem('userId', credentialResponse?.clientId)
+                localStorage.setItem('name', name)
+                localStorage.setItem('email', email)
+                localStorage.setItem('imageUrl', imageUrl)
 
                 const doc = {
                   _id: credentialResponse.clientId,

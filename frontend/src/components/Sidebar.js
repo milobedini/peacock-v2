@@ -4,6 +4,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 import logo from '../assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
+import { fetchUser } from '../utils/fetchUser'
 
 const isNotActiveStyle =
   'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize'
@@ -22,6 +23,9 @@ const Sidebar = ({ user, closeToggle }) => {
   const handleCloseSidebar = () => {
     if (closeToggle) closeToggle(false)
   }
+
+  const userInfo = fetchUser()
+
   return (
     <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
       <div className="flex flex-col">
@@ -60,18 +64,18 @@ const Sidebar = ({ user, closeToggle }) => {
           ))}
         </div>
       </div>
-      {user && (
+      {userInfo?.id && (
         <Link
-          to={`user-profile/${user._id}`}
+          to={`user-profile/${userInfo.id}`}
           className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
           onClick={handleCloseSidebar}
         >
           <img
-            src={user.image}
+            src={`${userInfo?.imageUrl}`}
             className="w-10 h-10 rounded-full"
             alt="user-profile"
           />
-          <p>{user.userName}</p>
+          <p>{userInfo.name}</p>
         </Link>
       )}
     </div>
