@@ -7,7 +7,7 @@ import logo from '../assets/peacock.png'
 import { getUser } from '../client'
 import UserProfile from '../components/UserProfile'
 import Pins from './Pins'
-import { IoLogoGoogle } from 'react-icons/io'
+import { FcGoogle } from 'react-icons/fc'
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
@@ -49,12 +49,16 @@ const Home = () => {
           {userId ? (
             <Link to={userId && `user-profile/${userId}`}>
               {user?.image && (
-                <img src={user?.image} alt="logo" className="w-28" />
+                <img
+                  src={user?.image}
+                  alt="logo"
+                  className="w-16  rounded-full"
+                />
               )}
             </Link>
           ) : (
             <Link to={`/login`}>
-              <IoLogoGoogle className="w-10 h-10 rounded-full text-red-600" />
+              <FcGoogle className="w-10 h-10 rounded-full" />
             </Link>
           )}
         </div>

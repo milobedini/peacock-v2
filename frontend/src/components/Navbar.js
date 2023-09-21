@@ -28,7 +28,10 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         />
       </div>
       {!userInfo.id && (
-        <Link to={`/login`} className="p-2 rounded-lg shadow-lg mx-3">
+        <Link
+          to={`/login`}
+          className="p-2 rounded-lg shadow-lg mx-3 hidden md:flex"
+        >
           <FcGoogle className="w-10 h-10 rounded-full" />
           {/* <p className="text-bold text-xl">Sign In</p> */}
         </Link>

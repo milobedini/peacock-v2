@@ -18,6 +18,7 @@ const Login = () => {
           controls={false}
           muted
           autoPlay
+          playsInline
           className="w-full h-full object-cover"
         />
         <div className="absolute flex flex-col items-center justify-center top-0 right-0 left-0 bottom-0 bg-blackOverlay">
