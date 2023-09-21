@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdDownloadForOffline } from 'react-icons/md'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
 import { client, urlFor } from '../client'
@@ -99,10 +99,7 @@ const PinDetail = ({ user }) => {
             </h1>
             <p className="mt-3">{pinDetail.about}</p>
           </div>
-          <Link
-            to={`user-profile/${pinDetail.postedBy?._id}`}
-            className="flex gap-2 mt-5 items-center bg-white rounded-lg"
-          >
+          <div className="flex gap-2 mt-5 items-center bg-white rounded-lg">
             <img
               src={pinDetail.postedBy?.image}
               alt="user"
@@ -111,7 +108,7 @@ const PinDetail = ({ user }) => {
             <p className="font-semibold capitalize">
               {pinDetail.postedBy?.userName}
             </p>
-          </Link>
+          </div>
           <h2 className="mt-5 text-2xl">Comments</h2>
           <div className="max-h-370 overflow-y-auto">
             {pinDetail?.comments?.map((comment, index) => (
@@ -122,7 +119,7 @@ const PinDetail = ({ user }) => {
                 <img
                   src={comment.postedBy.image}
                   alt="user-profile"
-                  className="w-10 h-10 rounded-full cursor-pointer"
+                  className="w-10 h-10 rounded-full"
                 />
                 <div className="flex flex-col">
                   <p className="font-bold">{comment.postedBy.userName}</p>
@@ -132,13 +129,13 @@ const PinDetail = ({ user }) => {
             ))}
           </div>
           <div className="flex flex-wrap mt-6 gap-3 items-center">
-            <Link to={`user-profile/${pinDetail.postedBy?._id}`}>
+            <div>
               <img
-                src={pinDetail.postedBy?.image}
+                src={user?.image}
                 alt="user"
-                className="w-8 h-8 rounded-full cursor-pointer"
+                className="w-8 h-8 rounded-full"
               />
-            </Link>
+            </div>
             <input
               type="text"
               placeholder="Add a comment"

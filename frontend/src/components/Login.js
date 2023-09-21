@@ -1,7 +1,7 @@
 import React from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import shareVideo from '../assets/share.mp4'
-import logo from '../assets/logowhite.png'
+import logo from '../assets/peacock.png'
 import jwtDecode from 'jwt-decode'
 import { client } from '../client'
 import { useNavigate } from 'react-router-dom'

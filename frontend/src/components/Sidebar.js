@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { RiHomeFill } from 'react-icons/ri'
 import { IoIosArrowForward, IoLogoGoogle } from 'react-icons/io'
 
-import logo from '../assets/logo.png'
+import logo from '../assets/peacock.png'
 import { Link, NavLink } from 'react-router-dom'
 import { fetchUser } from '../utils/fetchUser'
 import { categories } from '../utils/constants'
