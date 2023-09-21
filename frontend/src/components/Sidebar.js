@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { RiHomeFill } from 'react-icons/ri'
-import { IoIosArrowForward, IoLogoGoogle } from 'react-icons/io'
 
 import logo from '../assets/peacock.png'
 import { Link, NavLink } from 'react-router-dom'
 import { fetchUser } from '../utils/fetchUser'
 import { categories } from '../utils/constants'
+import { FcGoogle } from 'react-icons/fc'
 
 const isNotActiveStyle =
   'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize'
@@ -88,7 +88,7 @@ const Sidebar = ({ user, closeToggle }) => {
           className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
           onClick={handleCloseSidebar}
         >
-          <IoLogoGoogle className="w-10 h-10 rounded-full text-red-600" />
+          <FcGoogle className="w-10 h-10 rounded-full" />
           <p className="text-bold text-xl">Sign In</p>
         </Link>
       )}
