@@ -1,6 +1,5 @@
 import React from 'react'
 import { GoogleLogin } from '@react-oauth/google'
-import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
 import jwtDecode from 'jwt-decode'

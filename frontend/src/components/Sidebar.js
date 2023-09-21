@@ -1,23 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RiHomeFill } from 'react-icons/ri'
-import { IoIosArrowForward } from 'react-icons/io'
+import { IoIosArrowForward, IoLogoGoogle } from 'react-icons/io'
 
 import logo from '../assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
 import { fetchUser } from '../utils/fetchUser'
+import { categories } from '../utils/constants'
 
 const isNotActiveStyle =
   'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize'
 const isActiveStyle =
   'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize'
-const categories = [
-  { name: 'Animals' },
-  { name: 'Wallpapers' },
-  { name: 'Photography' },
-  { name: 'Coding' },
-  { name: 'Sport' },
-  { name: 'Other' },
-]
 
 const Sidebar = ({ user, closeToggle }) => {
   const handleCloseSidebar = () => {
@@ -25,6 +18,12 @@ const Sidebar = ({ user, closeToggle }) => {
   }
 
   const userInfo = fetchUser()
+
+  let userId = localStorage.getItem('userId')
+
+  useEffect(() => {
+    userId = localStorage.getItem('userId')
+  }, [userId])
 
   return (
     <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
@@ -59,12 +58,17 @@ const Sidebar = ({ user, closeToggle }) => {
               onClick={handleCloseSidebar}
               key={cat.name}
             >
+              <img
+                src={cat.image}
+                className="w-8 h-8 rounded-full shadow-sm"
+                alt="category"
+              />
               {cat.name}
             </NavLink>
           ))}
         </div>
       </div>
-      {userInfo?.id && (
+      {userInfo?.id && userId && (
         <Link
           to={`user-profile/${userInfo.id}`}
           className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
@@ -76,6 +80,16 @@ const Sidebar = ({ user, closeToggle }) => {
             alt="user-profile"
           />
           <p>{userInfo.name}</p>
+        </Link>
+      )}
+      {(!userInfo.id || !userId) && (
+        <Link
+          to={`/login`}
+          className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
+          onClick={handleCloseSidebar}
+        >
+          <IoLogoGoogle className="w-10 h-10 rounded-full text-red-600" />
+          <p className="text-bold text-xl">Sign In</p>
         </Link>
       )}
     </div>

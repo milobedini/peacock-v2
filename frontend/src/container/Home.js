@@ -7,15 +7,17 @@ import logo from '../assets/logo.png'
 import { getUser } from '../client'
 import UserProfile from '../components/UserProfile'
 import Pins from './Pins'
+import { IoLogoGoogle } from 'react-icons/io'
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
   const [user, setUser] = useState(null)
   const scrollRef = useRef(null)
 
-  const userId = localStorage.getItem('userId')
+  let userId = localStorage.getItem('userId')
 
   useEffect(() => {
+    userId = localStorage.getItem('userId')
     if (userId) {
       const getUserList = async () => {
         const users = await getUser()
@@ -44,9 +46,17 @@ const Home = () => {
           <Link to="/">
             <img src={logo} alt="logo" className="w-28" />
           </Link>
-          <Link to={userId && `user-profile/${userId}`}>
-            <img src={user?.image} alt="logo" className="w-28" />
-          </Link>
+          {userId ? (
+            <Link to={userId && `user-profile/${userId}`}>
+              {user?.image && (
+                <img src={user?.image} alt="logo" className="w-28" />
+              )}
+            </Link>
+          ) : (
+            <Link to={`/login`}>
+              <IoLogoGoogle className="w-10 h-10 rounded-full text-red-600" />
+            </Link>
+          )}
         </div>
         {toggleSidebar && (
           <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">

@@ -47,7 +47,6 @@ const CreatePin = ({ user }) => {
   }
 
   const savePin = () => {
-    console.log(title, about, destination, imageAsset?._id, category)
     if (title && about && destination && imageAsset?._id && category) {
       const doc = {
         _type: 'pin',
